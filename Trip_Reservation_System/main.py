@@ -63,22 +63,18 @@ def admin():
     return render_template('admin.html')
 
 def generate_eticket(first_name):
-    # The fixed string
-    fixed_string = "INFOTC4320"
+    base_string = "INFOTC4320"
+    eticket = []
     
-    # Determine the length to loop over based on the shortest string
-    max_len = min(len(first_name), len(fixed_string))
-    
-    # Create the e-ticket by alternating characters
-    eticket = ""
-    for i in range(max_len):
-        eticket += first_name[i] + fixed_string[i]
-    
-    # If the first name is longer, append any remaining characters from the name
-    if len(first_name) > max_len:
-        eticket += first_name[max_len:]
-    
-    return eticket
+    # Alternate characters from first name and base string
+    for i in range(max(len(first_name), len(base_string))):
+        if i < len(first_name):
+            eticket.append(first_name[i])  # Add character from first name
+        if i < len(base_string):
+            eticket.append(base_string[i])  # Add character from INFOTC4320
+
+    # Join the list into a single string
+    return ''.join(eticket)
 
 @app.route('/admin_portal')
 def admin_portal():
