@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Reserve a Seat{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Reserve a Seat</h1>
+    <form method="POST">
+        First Name: <input type="text" name="first_name"><br><br>
+        Last Name: <input type="text" name="last_name"><br><br>
+        Row: <select name="seat_row">
+            {% for i in range(1, 13) %}
+            <option value="{{ i }}">{{ i }}</option> <!-- User sees 1 to 12 -->
+            {% endfor %}
+        </select><br><br>
+        Column: <select name="seat_column">
+            {% for i in range(1, 5) %}
+            <option value="{{ i }}">{{ i }}</option> <!-- User sees 1 to 4 -->
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Reserve</button>
+    </form>
+    <h2>Seating Chart</h2>
+    <table>
+        {% for row in seating_chart %}
+        <tr>
+            {% for seat in row %}
+            <td>{{ seat }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <p>X: Reserved, O: Available</p>
+</div>
+{% endblock %}
+
+

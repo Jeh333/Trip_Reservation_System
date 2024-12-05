@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Seating Chart{% endblock %}
+
+{% block content %}
+<h1>Bus Seating Chart</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>Seat A</th>
+            <th>Seat B</th>
+            <th>Seat C</th>
+            <th>Seat D</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row_index, row in enumerate(seating_chart) %}
+        <tr>
+            <td>Row {{ row_index + 1 }}</td>
+            {% for seat in row %}
+            <td class="{{ 'reserved' if seat else 'available' }}">
+                {{ seat if seat else 'Available' }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('admin_portal') }}">Back to Admin Portal</a>
+{% endblock %}

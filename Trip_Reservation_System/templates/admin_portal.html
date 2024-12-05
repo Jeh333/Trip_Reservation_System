@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Portal{% endblock %}
+
+{% block content %}
+<h1>Admin Portal</h1>
+<table>
+    {% for row in seating_chart %}
+    <tr>
+        {% for seat in row %}
+        <td class="{{ 'reserved' if seat else 'available' }}">{{ seat if seat else 'O' }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<p>Total Sales: ${{ total_sales }}</p>
+{% endblock %}
